@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-def DownloadFile(url)
+def download_file(url)
 	filename = url.split('/')[-1]
 	r = requests.get(url, stream=True)
 	with open(filename, 'wb') as f:
