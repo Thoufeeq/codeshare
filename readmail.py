@@ -26,3 +26,6 @@ status, data = imap.select('INBOX')
 
 ## fetching message header by  using message( ID)
 status, msg_header = imap.fetch('1', '(BODY.PEEK[HEADER])')
+
+## fetching the full message ( ID=1)
+status, AllTheMessage= imap.fetch('1', '(RFC822)') 
