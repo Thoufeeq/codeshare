@@ -2,7 +2,7 @@ import imaplib
 import email
 mail = imaplib.IMAP4_SSL('imap.gmail.com')
 # imaplib module implements connection based on IMAPv4 protocol
-mail.login('trilaciousexps@gmail.com', 'experiments@tlabs')
+mail.login('emailaddress@gmail.com', 'password@gmail.com')
 # >> ('OK', [username at gmail.com Vineet authenticated (Success)'])
 
 mail.list() # Lists all labels in GMail
