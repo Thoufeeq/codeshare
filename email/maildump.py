@@ -22,7 +22,7 @@ email_message = email.message_from_string(raw_email_string)
 for part in email_message.walk():
         if part.get_content_type() == "text/plain":
                 body = part.get_payload(decode=True)
-                save_string = str("D:Dumpgmailemail_" + str(x) + ".eml")
+                save_string = str("maildump_" + str(x) + ".eml")
                 myfile = open(save_string, 'a')
                 myfile.write(str(body))
                 myfile.close()
