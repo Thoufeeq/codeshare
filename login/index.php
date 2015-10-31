@@ -2,29 +2,32 @@
 include('login.php'); // Includes Login Script
 
 if(isset($_SESSION['login_user'])){
-header("location: profile.php");
+header("location: dashboard.php");
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Classroom Surveillance Using Raspberry Pi</title>
-<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div id="main">
-<h1>Classroom Surveillance Using Raspberry Pi</h1>
-<div id="login">
-<h2>Login</h2>
-<form action="" method="post">
-<label>UserName :</label>
-<input id="name" name="username" placeholder="username" type="text">
-<label>Password :</label>
-<input id="password" name="password" placeholder="**********" type="password">
-<input name="submit" type="submit" value=" Login ">
-<span><?php echo $error; ?></span>
-</form>
-</div>
+<br>
+<div class="heading"><h1>Classroom Surveillance</h1></div>
+
+<br>
+<div class="login-block">
+    <h1>Login</h1>
+    <form action="" method="post">
+    <input type="text" value="" placeholder="Username" id="username" />
+    <input type="password" value="" placeholder="Password" id="password" />
+    <!-- <button>Login</button> -->
+    <input name="submit" type="submit" value=" Login ">
+    <span><?php echo $error; ?></span>
+	</form>
 </div>
 </body>
 </html>
