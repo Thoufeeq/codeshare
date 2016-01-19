@@ -12,6 +12,7 @@ while True:
 	time.sleep(5)
 	GPIO.output(18, False)
 	camera = picamera.PiCamera()
+	time.sleep(0.2)
 	camera.capture('pic.jpg')
 	camera.close()
 	result = pattern_check()
