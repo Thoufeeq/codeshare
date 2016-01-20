@@ -28,7 +28,6 @@ def pattern_check():
 	V_count = 0
 	H_count = 0
 	O_count = 0
-	Canny(img,edges,50,200,3)
 	lines = cv2.HoughLines(edges,1,np.pi/180,200)
 	for rho, theta in lines[0]:
 		T_count += 1
