@@ -22,6 +22,9 @@ while True:
 	print "Image captured"
 	result = pattern_check()
 	if result = False:
+		print "Pattern is not matching. Halting the conveyor...\nTriggering buzzer...\nSending text message to admin..."
+		GPIO.output(15, True)
+		GPIO.output(15, False)
 		break
 		
 
