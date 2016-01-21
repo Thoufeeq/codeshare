@@ -22,7 +22,7 @@ while True:
 	camera.close()
 	print "Image captured"
 	result = pattern_check()
-	if result = False:
+	if result == False:
 		print "Pattern is not matching. Halting the conveyor...\nTriggering buzzer...\nSending text message to admin..."
 		GPIO.output(15, True)
 		time.sleep(0.2)
