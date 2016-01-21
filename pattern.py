@@ -7,7 +7,7 @@ import picamera
 GPIO.setup(14, GPIO.OUT)
 GPIO.setup(15, GPIO.OUT)
 GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
+input_state = GPIO.input(18)
 
 while True:
 	GPIO.output(14, True)
