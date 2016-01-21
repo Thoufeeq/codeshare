@@ -4,17 +4,22 @@ import numpy as np
 import RPi.GPIO as GPIO
 import picamera
 
-GPIO.setup(18, GPIO.OUT)
-GPIO.setup(11, GPIO.PIN)
+GPIO.setup(14, GPIO.OUT)
+GPIO.setup(15, GPIO.OUT)
+GPIO.setup(18, GPIO.PIN)
 
 while True:
-	GPIO.output(18, True)
-	time.sleep(5)
-	GPIO.output(18, False)
+	GPIO.output(14, True)
+	print "Starting conveyor..."
+	time.sleep(3)
+	GPIO.output(14, False)
+	print "Stopping conveyor..."
 	camera = picamera.PiCamera()
 	time.sleep(0.2)
+	camera.resolution(640, 480)
 	camera.capture('pic.jpg')
 	camera.close()
+	print "Image captured"
 	result = pattern_check()
 	if result = False:
 		break
