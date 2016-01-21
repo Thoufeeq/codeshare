@@ -6,7 +6,8 @@ import picamera
 
 GPIO.setup(14, GPIO.OUT)
 GPIO.setup(15, GPIO.OUT)
-GPIO.setup(18, GPIO.PIN)
+GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
 
 while True:
 	GPIO.output(14, True)
@@ -26,8 +27,9 @@ while True:
 		GPIO.output(15, True)
 		time.sleep(0.2)
 		GPIO.output(15, False)
-		break
-		
+		while input_state == True:
+			print "Press button to restart"
+        		break	
 
 def pattern_check():
 	img = cv2.imread('pic.jpg')
