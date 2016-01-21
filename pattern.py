@@ -24,6 +24,7 @@ while True:
 	if result = False:
 		print "Pattern is not matching. Halting the conveyor...\nTriggering buzzer...\nSending text message to admin..."
 		GPIO.output(15, True)
+		time.sleep(0.2)
 		GPIO.output(15, False)
 		break
 		
