@@ -49,34 +49,34 @@ def pattern_check():
 	else:
 		return True
 try:
-while True:
-	GPIO.output(14, True)
-	print "Starting conveyor..."
-	time.sleep(3)
-	GPIO.output(14, False)
-	print "Stopping conveyor..."
-	camera = picamera.PiCamera()
-	time.sleep(0.2)
-	camera.resolution= (640, 480)
-	camera.capture('pic.jpg')
-	camera.close()
-	print "Image captured"
-	result = pattern_check()
-	if result == False:
-		print "Pattern is not matching. Halting the conveyor...\nTriggering buzzer...\nSending text message to admin..."
-		GPIO.output(15, True)
+	while True:
+		GPIO.output(14, True)
+		print "Starting conveyor..."
+		time.sleep(3)
+		GPIO.output(14, False)
+		print "Stopping conveyor..."
+		camera = picamera.PiCamera()
 		time.sleep(0.2)
-		GPIO.output(15, False)
-		print "Stopped till manual restart"
-		while True:
+		camera.resolution= (640, 480)
+		camera.capture('pic.jpg')
+		camera.close()
+		print "Image captured"
+		result = pattern_check()
+		if result == False:
+			print "Pattern is not matching. Halting the conveyor...\nTriggering buzzer...\nSending text message to admin..."
+			GPIO.output(15, True)
+			time.sleep(0.2)
 			GPIO.output(15, False)
-			
-		'''
-		uncomment this block once push-button switch is setup
-		while input_state == True:
-			print "Press button to restart"
-        		break	
-		'''
+			print "Stopped till manual restart"
+			while True:
+				GPIO.output(15, False)
+				
+			'''
+			uncomment this block once push-button switch is setup
+			while input_state == True:
+				print "Press button to restart"
+	        		break	
+			'''
 except KeyboardInterrupt:
 	print "Interrupted"
 	GPIO.cleanup()
