@@ -18,7 +18,7 @@ while True:
 	print "Stopping conveyor..."
 	camera = picamera.PiCamera()
 	time.sleep(0.2)
-	camera.resolution(640, 480)
+	camera.resolution= (640, 480)
 	camera.capture('pic.jpg')
 	camera.close()
 	print "Image captured"
