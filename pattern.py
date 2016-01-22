@@ -4,6 +4,7 @@ import numpy as np
 import RPi.GPIO as GPIO
 import picamera
 
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(14, GPIO.OUT)
 GPIO.setup(15, GPIO.OUT)
 GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
