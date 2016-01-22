@@ -10,28 +10,6 @@ GPIO.setup(15, GPIO.OUT)
 GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 input_state = GPIO.input(18)
 
-while True:
-	GPIO.output(14, True)
-	print "Starting conveyor..."
-	time.sleep(3)
-	GPIO.output(14, False)
-	print "Stopping conveyor..."
-	camera = picamera.PiCamera()
-	time.sleep(0.2)
-	camera.resolution= (640, 480)
-	camera.capture('pic.jpg')
-	camera.close()
-	print "Image captured"
-	result = pattern_check()
-	if result == False:
-		print "Pattern is not matching. Halting the conveyor...\nTriggering buzzer...\nSending text message to admin..."
-		GPIO.output(15, True)
-		time.sleep(0.2)
-		GPIO.output(15, False)
-		while input_state == True:
-			print "Press button to restart"
-        		break	
-
 def pattern_check():
 	img = cv2.imread('pic.jpg')
 	gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -65,6 +43,28 @@ def pattern_check():
 	if V_count < 5 or (H_count+O_count)/(T_count+1)>0.05:
 		return False
 	else
-		return True	
+		return True
+
+while True:
+	GPIO.output(14, True)
+	print "Starting conveyor..."
+	time.sleep(3)
+	GPIO.output(14, False)
+	print "Stopping conveyor..."
+	camera = picamera.PiCamera()
+	time.sleep(0.2)
+	camera.resolution= (640, 480)
+	camera.capture('pic.jpg')
+	camera.close()
+	print "Image captured"
+	result = pattern_check()
+	if result == False:
+		print "Pattern is not matching. Halting the conveyor...\nTriggering buzzer...\nSending text message to admin..."
+		GPIO.output(15, True)
+		time.sleep(0.2)
+		GPIO.output(15, False)
+		while input_state == True:
+			print "Press button to restart"
+        		break	
 
 cv2.imwrite('houghlines3.jpg', img)	
