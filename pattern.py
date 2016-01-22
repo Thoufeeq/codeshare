@@ -42,7 +42,7 @@ def pattern_check():
 	ratio = V_count/(H_count+O_count+1)		
 	if V_count < 5 or (H_count+O_count)/(T_count+1)>0.05:
 		return False
-	else
+	else:
 		return True
 
 while True:
