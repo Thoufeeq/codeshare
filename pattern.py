@@ -57,7 +57,7 @@ def pattern_check():
 			V_count += 1
 		elif theta >= np.pi/180*80 and theta <= np.pi/180*100:
 			H_count += 1
-		else
+		else:
 			O_count += 1
 	
 	ratio = V_count/(H_count+O_count+1)		
