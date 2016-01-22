@@ -5,7 +5,6 @@ import RPi.GPIO as GPIO
 import picamera
 
 GPIO.setmode(GPIO.BCM)
-#GPIO.cleanup()
 GPIO.setup(14, GPIO.OUT)
 GPIO.output(14, False)
 GPIO.setup(15, GPIO.OUT)
@@ -49,7 +48,7 @@ def pattern_check():
 		return False
 	else:
 		return True
-
+try:
 while True:
 	GPIO.output(14, True)
 	print "Starting conveyor..."
@@ -78,4 +77,6 @@ while True:
 			print "Press button to restart"
         		break	
 		'''
-		
+except KeyboardInterrupt:
+	print "Interrupted"
+	GPIO.cleanup()
