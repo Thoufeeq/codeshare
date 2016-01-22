@@ -5,8 +5,11 @@ import RPi.GPIO as GPIO
 import picamera
 
 GPIO.setmode(GPIO.BCM)
+#GPIO.cleanup()
 GPIO.setup(14, GPIO.OUT)
+GPIO.output(14, False)
 GPIO.setup(15, GPIO.OUT)
+GPIO.output(15, True)
 GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 input_state = GPIO.input(18)
 
@@ -21,7 +24,7 @@ def pattern_check():
 	lines = cv2.HoughLines(edges,1,np.pi/180,200)
 	for rho, theta in lines[0]:
 		T_count += 1
-		'''
+		
 		a = np.cos(theta)
 		b = np.sin(theta)
 		x0 = a*rho
@@ -30,8 +33,10 @@ def pattern_check():
 		x2 = int(y0 + 1000*(a))
 		y1 = int(x0 + 1000*(-b))
 		y2 = int(x0 + 1000*(a))
-		cv2.line(img,(x1, y1),(0,0,255),2)
-		'''
+
+		cv2.imwrite('edges.jpg', edges)
+		cv2.imwrite('houghlines3.jpg', img)
+
 		if theta >= np.pi/180*170 or theta <= np.pi/180*10:
 			V_count += 1
 		elif theta >= np.pi/180*80 and theta <= np.pi/180*100:
@@ -63,8 +68,14 @@ while True:
 		GPIO.output(15, True)
 		time.sleep(0.2)
 		GPIO.output(15, False)
+		print "Stopped till manual restart"
+		while True:
+			GPIO.output(15, False)
+			
+		'''
+		uncomment this block once push-button switch is setup
 		while input_state == True:
 			print "Press button to restart"
         		break	
-
-cv2.imwrite('houghlines3.jpg', img)	
+		'''
+		
