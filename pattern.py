@@ -6,10 +6,11 @@ import picamera
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(14, GPIO.OUT)
-GPIO.output(14, False)
 GPIO.setup(15, GPIO.OUT)
-GPIO.output(15, True)
 GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+GPIO.output(14, False)
+GPIO.output(15, True)
 input_state = GPIO.input(18)
 
 def pin_cleanup():
@@ -17,20 +18,21 @@ def pin_cleanup():
 	GPIO.output(15, True)
 	
 def different_pattern():
-	print "Pattern is not matching. Halting the conveyor...\nTriggering buzzer...\nSending text message to admin..."
+	print "Pattern mismatch!"
 	GPIO.output(15, True)
 	time.sleep(0.2)
+	print "Triggering the buzzer, and sending SMS to admin..."
 	GPIO.output(15, False)
-	print "Stopped till manual restart"
+	print "System is halted until manual restart."
 	while True:
-		GPIO.output(15, False)
+		GPIO.output(14, False)
 	
 def workflow():
 	while True:
-		GPIO.output(14, True)
+		GPIO.output(14, False)
 		print "Starting conveyor..."
 		time.sleep(3)
-		GPIO.output(14, False)
+		GPIO.output(14, True)
 		print "Stopping conveyor..."
 		camera = picamera.PiCamera()
 		time.sleep(0.2)
