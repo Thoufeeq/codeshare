@@ -80,3 +80,6 @@ try:
 except KeyboardInterrupt:
 	print "Interrupted"
 	GPIO.cleanup()
+except TypeError:
+	print "A totally different pattern detected."
+	
