@@ -41,12 +41,12 @@ def workflow():
 		result = pattern_check()
 		if result == False:
 			print "Pattern is not matching. Halting the conveyor...\nTriggering buzzer...\nSending text message to admin..."
-			GPIO.output(15, True)
-			time.sleep(0.2)
 			GPIO.output(15, False)
+			time.sleep(0.2)
+			GPIO.output(15, True)
 			print "Stopped till manual restart"
 			while True:
-				GPIO.output(15, False)
+				GPIO.output(14, False)
 				
 			'''
 			uncomment this block once push-button switch is setup
