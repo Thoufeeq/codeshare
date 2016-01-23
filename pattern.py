@@ -83,6 +83,7 @@ try:
 			'''
 except TypeError:
 	print "A totally different pattern detected. Stopping the process."
+	continue
 except KeyboardInterrupt:
 	print "Interrupted"
 	pin_cleanup()
