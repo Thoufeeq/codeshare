@@ -26,6 +26,7 @@ def different_pattern():
 	print "System is halted until manual restart."
 	while True:
 		GPIO.output(14, True)
+		GPIO.output(15,True)
 	
 def workflow():
 	while True:
