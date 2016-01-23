@@ -12,6 +12,10 @@ GPIO.output(15, True)
 GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 input_state = GPIO.input(18)
 
+def pin_cleanup():
+	GPIO.output(14, False)
+	GPIO.output(15, True)
+
 def pattern_check():
 	img = cv2.imread('pic.jpg')
 	gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -77,9 +81,8 @@ try:
 				print "Press button to restart"
 	        		break	
 			'''
+except TypeError:
+	print "A totally different pattern detected. Stopping the process."
 except KeyboardInterrupt:
 	print "Interrupted"
-	GPIO.cleanup()
-except TypeError:
-	print "A totally different pattern detected."
-	
+	pin_cleanup()
