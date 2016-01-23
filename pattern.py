@@ -16,6 +16,14 @@ def pin_cleanup():
 	GPIO.output(14, False)
 	GPIO.output(15, True)
 
+def different_patter():
+	GPIO.output(15, True)
+	time.sleep(0.2)
+	GPIO.output(15, False)
+	print "Stopped till manual restart"
+	while True:
+		GPIO.output(15, False)
+
 def pattern_check():
 	img = cv2.imread('pic.jpg')
 	gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -84,6 +92,7 @@ while True:
 				'''	
 	except TypeError:
 		print "A totally different pattern detected. Stopping the process."
+		different_pattern()
 	except KeyboardInterrupt:
 		print "Interrupted"
 		pin_cleanup()
