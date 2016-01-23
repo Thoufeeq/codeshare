@@ -16,6 +16,15 @@ def pin_cleanup():
 	GPIO.output(14, False)
 	GPIO.output(15, True)
 	
+def different_pattern():
+	print "Pattern is not matching. Halting the conveyor...\nTriggering buzzer...\nSending text message to admin..."
+	GPIO.output(15, True)
+	time.sleep(0.2)
+	GPIO.output(15, False)
+	print "Stopped till manual restart"
+	while True:
+		GPIO.output(15, False)
+	
 def workflow():
 	while True:
 		GPIO.output(14, True)
@@ -87,7 +96,7 @@ try:
 	workflow()
 except TypeError:
 	print "A totally different pattern detected. Stopping the process."
-	workflow()
+	different_pattern()
 except KeyboardInterrupt:
 	print "Interrupted"
 	pin_cleanup()
