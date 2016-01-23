@@ -52,8 +52,9 @@ def pattern_check():
 		return False
 	else:
 		return True
-try:
-	while True:
+
+while True:
+	try:
 		GPIO.output(14, True)
 		print "Starting conveyor..."
 		time.sleep(3)
@@ -74,15 +75,15 @@ try:
 			print "Stopped till manual restart"
 			while True:
 				GPIO.output(15, False)
-				
-			'''
-			uncomment this block once push-button switch is setup
-			while input_state == True:
-				print "Press button to restart"
-	        		break	
-			'''
-except TypeError:
-	print "A totally different pattern detected. Stopping the process."
-except KeyboardInterrupt:
-	print "Interrupted"
-	pin_cleanup()
+					
+				'''
+				uncomment this block once push-button switch is setup
+				while input_state == True:
+					print "Press button to restart"
+		        		break	
+				'''	
+	except TypeError:
+		print "A totally different pattern detected. Stopping the process."
+	except KeyboardInterrupt:
+		print "Interrupted"
+		pin_cleanup()
