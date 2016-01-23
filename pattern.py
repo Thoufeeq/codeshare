@@ -84,7 +84,7 @@ def pattern_check():
 			O_count += 1
 	
 	ratio = V_count/(H_count+O_count+1)		
-	if V_count < 5 or (H_count+O_count)/(T_count+1)>0.05:
+	if H_count < 5 or (V_count+O_count)/(T_count+1)>0.05:
 		return False
 	else:
 		return True
