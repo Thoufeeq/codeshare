@@ -19,10 +19,10 @@ def pin_cleanup():
 	
 def different_pattern():
 	print "Pattern mismatch!"
-	GPIO.output(15, True)
+	GPIO.output(15, False)
 	time.sleep(0.2)
 	print "Triggering the buzzer, and sending SMS to admin..."
-	GPIO.output(15, False)
+	GPIO.output(15, True)
 	print "System is halted until manual restart."
 	while True:
 		GPIO.output(14, True)
