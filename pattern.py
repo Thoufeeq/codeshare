@@ -82,6 +82,7 @@ def pattern_check():
 		return False
 	else:
 		return True
+
 try:
 	workflow()
 except TypeError:
