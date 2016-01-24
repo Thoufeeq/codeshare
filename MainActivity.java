@@ -2,15 +2,19 @@ package com.example.thoufeeq.speechtotext;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,23 +24,62 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private TextView resultTEXT;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        resultTEXT = (TextView)findViewById(R.id.TVresult);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
+        resultTEXT = (TextView) findViewById(R.id.TVresult);
+
+        Button startBtn = (Button) findViewById(R.id.Bmail);
+        startBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                sendEmail();
+            }
+        });
+
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+            setSupportActionBar(toolbar);
+
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setOnClickListener(new View.OnClickListener()
+
+            {
+                @Override
+                public void onClick (View view){
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+            }
+
+            );
+        }
+
+
+    protected void sendEmail() {
+        Log.i("Send email", "");
+        String[] TO = {"raspberrypinpp@gmail.com"};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("message/rfc822");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "A message from your app");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Your email message goes here...");
+
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Choose email client"));
+            finish();
+            Log.i("Finished sending email...", "");
+        }
+        catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(MainActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
     }
+
 
     public void onButtonClick(View v)
     {
