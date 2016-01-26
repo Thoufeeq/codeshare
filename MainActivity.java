@@ -24,6 +24,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private TextView resultTEXT;
+    public EditText resultedTEXT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         resultTEXT = (TextView) findViewById(R.id.TVresult);
-
+        resultedTEXT = (EditText) findViewById(R.id.fill_words);
         Button startBtn = (Button) findViewById(R.id.Bmail);
         startBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         emailIntent.setType("message/rfc822");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "A message from your app");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Your email message goes here...");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, resultedTEXT.getText().toString());
 
 
         try {
@@ -103,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
             {
                 ArrayList<String> result = i.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 resultTEXT.setText(result.get(0));
+                resultedTEXT.setText(result.get(0));
+                ArrayList<String> final_result = i.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
             }
                 break;
         }
