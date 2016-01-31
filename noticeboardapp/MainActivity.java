@@ -1,72 +1,51 @@
-package com.example.thoufeeq.speechtotext;
+package com.example.thoufeeq.smartnoticeboard;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Properties;
 
-public class MainActivity extends AppCompatActivity {
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public EditText resultedTEXT;
+    //Declaring EditText
+    //private EditText editTextEmail;
+    //private EditText editTextSubject;
+    private EditText editTextMessage;
+
+    //Send button
+    private Button buttonSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        resultedTEXT = (EditText) findViewById(R.id.fill_words);
-        Button startBtn = (Button) findViewById(R.id.Bmail);
-        startBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                sendEmail();
-            }
-        });
+        //Initializing the views
+        //editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        //editTextSubject = (EditText) findViewById(R.id.editTextSubject);
+        resultedTEXT = (EditText) findViewById(R.id.editTextMessage);
 
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        buttonSend = (Button) findViewById(R.id.buttonSend);
 
-            setSupportActionBar(toolbar);
-
-        }
-
-
-    protected void sendEmail() {
-        Log.i("Send email", "");
-        String[] TO = {"raspberrypinpp@gmail.com"};
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("message/rfc822");
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "New Notification");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, resultedTEXT.getText().toString());
-
-
-        try {
-            startActivity(Intent.createChooser(emailIntent, "Choose email client"));
-            finish();
-            Log.i("Finished sending email...", "");
-        }
-        catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(MainActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
-        }
+        //Adding click listener
+        buttonSend.setOnClickListener(this);
     }
 
+    // Speech Recognition
 
     public void onButtonClick(View v)
     {
@@ -108,26 +87,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // end
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+
+    private void sendEmail() {
+        //Getting content for email
+        //String email = editTextEmail.getText().toString().trim();
+        String email = "thoufeeq.mohd@gmail.com";
+        //String subject = editTextSubject.getText().toString().trim();
+        String subject = "New Notification!";
+        String message = resultedTEXT.getText().toString();
+
+        //Creating SendMail object
+        SendMail sm = new SendMail(this, email, subject, message);
+
+        //Executing sendmail to send email
+        sm.execute();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void onClick(View v) {
+        sendEmail();
     }
 }
