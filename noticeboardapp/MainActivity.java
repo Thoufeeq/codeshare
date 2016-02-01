@@ -22,8 +22,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public EditText resultedTEXT;
     //Declaring EditText
-    //private EditText editTextEmail;
-    //private EditText editTextSubject;
     private EditText editTextMessage;
 
     //Send button
@@ -35,8 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         //Initializing the views
-        //editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        //editTextSubject = (EditText) findViewById(R.id.editTextSubject);
         resultedTEXT = (EditText) findViewById(R.id.editTextMessage);
 
         buttonSend = (Button) findViewById(R.id.buttonSend);
@@ -91,10 +87,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void sendEmail() {
-        //Getting content for email
-        //String email = editTextEmail.getText().toString().trim();
+        
         String email = "thoufeeq.mohd@gmail.com";
-        //String subject = editTextSubject.getText().toString().trim();
         String subject = "New Notification!";
         String message = resultedTEXT.getText().toString();
 
